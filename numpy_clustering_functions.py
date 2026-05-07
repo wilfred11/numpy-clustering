@@ -174,6 +174,10 @@ def assign_data_to_cluster(data_set: np.ndarray, cluster_centers: np.ndarray, ce
         dataset_d=compute_distance_to_centers(data_set, cluster_centers)
         summed=np.sum(dataset_d,axis=2)
         minned=np.argmin(summed,axis=1)
+
+        if not center_labels is None:
+            minned=np.take(np.sort(center_labels), minned)
+
         return minned
     else:
         raise ValueError('The number of features in the center and data set elements differ')
